@@ -3,7 +3,7 @@ var path = require('path')
 var test = require('tape')
 var WSClient = require('sendy-ws')
 var WebSocketRelay = require('sendy-ws-relay')
-var Sendy = require('sendy')
+var Connection = require('sendy').Connection
 var DSA = require('@tradle/otr').DSA
 var KEYS = require('./fixtures/keys')
 var strings = require('./fixtures/strings')
@@ -20,8 +20,8 @@ test('websockets with relay', function (t) {
     path: relayPath
   })
 
-  var receive = Sendy.prototype.receive
-  Sendy.prototype.receive = function () {
+  var receive = Connection.prototype.receive
+  Connection.prototype.receive = function () {
     // drop messages randomly
     if (Math.random() < 0.4) {
       return receive.apply(this, arguments)
@@ -103,7 +103,7 @@ test('websockets with relay', function (t) {
     var x = names.length * (names.length - 1)
     t.equal(numReceived, x)
     t.equal(numSent, x)
-    Sendy.prototype.receive = receive
+    Connection.prototype.receive = receive
 
     for (var me in state) {
       state[me].client.destroy()
