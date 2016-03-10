@@ -90,13 +90,13 @@ test('websockets with relay', function (t) {
     })
   })
 
-  setInterval(function () {
-    // randomly drop connections
-    var idx1 = Math.random() * names.length | 0
-    var name = names[idx1]
-    // console.log('randomly disconnecting ' + name)
-    state[name].networkClient._socket.disconnect()
-  }, 1000).unref()
+  // setInterval(function () {
+  //   // randomly drop connections
+  //   var idx1 = Math.random() * names.length | 0
+  //   var name = names[idx1]
+  //   // console.log('randomly disconnecting ' + name)
+  //   state[name].networkClient._socket.disconnect()
+  // }, 1000).unref()
 
   function done () {
     if (--togo) return
