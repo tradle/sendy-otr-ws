@@ -43,7 +43,8 @@ test('websockets with relay', function (t) {
 
   names.forEach(function (me, i) {
     var networkClient = new WSClient({
-      url: relayURL
+      url: relayURL + '?from=' + me,
+      autoConnect: true
     })
 
     var myState = state[me] = {
@@ -58,7 +59,7 @@ test('websockets with relay', function (t) {
     }
 
     // ;['connect', 'disconnect'].forEach(function (e) {
-    //   myState.client._wsClient.on(e, function () {
+    //   myState.client._uclient.on(e, function () {
     //     console.log(me, e + 'ed')
     //   })
     // })
