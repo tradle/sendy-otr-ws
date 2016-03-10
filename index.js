@@ -12,6 +12,7 @@ exports.Switchboard = function (opts) {
   }, opts)
 
   return new WS.Switchboard(extend({
+    identifier: opts.key.fingerprint(),
     unreliable: opts.unreliable,
     clientForRecipient: function (fingerprint) {
       return new OTRClient({
